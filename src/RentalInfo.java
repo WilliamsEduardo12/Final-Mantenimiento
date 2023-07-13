@@ -19,7 +19,7 @@ public class RentalInfo {
       if (movies.get(r.getMovieId()).getCode().equals("regular")) {
         thisAmount = 2;
         if (r.getDays() > 2) {
-          thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
+          thisAmount += (r.getDays() - 2) * 1.5 ;
         }
       }
       if (movies.get(r.getMovieId()).getCode().equals("new")) {
@@ -28,18 +28,18 @@ public class RentalInfo {
       if (movies.get(r.getMovieId()).getCode().equals("childrens")) {
         thisAmount = 1.5;
         if (r.getDays() > 3) {
-          thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
+          thisAmount += (r.getDays() - 3) * 1.5;
         }
       }
 
       //add frequent bonus points
       frequentEnterPoints++;
       // add bonus for a two day new release rental
-      if (movies.get(r.getMovieId()).getCode() == "new" && r.getDays() > 2) frequentEnterPoints++;
+      if (movies.get(r.getMovieId()).getCode().equals("new") && r.getDays() > 2) frequentEnterPoints++;
 
       //print figures for this rental
       result += "\t" + movies.get(r.getMovieId()).getTitle() + "\t" + thisAmount + "\n";
-      totalAmount = totalAmount + thisAmount;
+      totalAmount += thisAmount;
     }
     // add footer lines
     result += "Amount owed is " + totalAmount + "\n";
