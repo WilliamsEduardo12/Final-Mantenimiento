@@ -16,20 +16,28 @@ public class RentalInfo {
       double thisAmount = 0;
 
       // determine amount for each movie
-      if (movies.get(r.getMovieId()).getCode().equals("regular")) {
-        thisAmount = 2;
-        if (r.getDays() > 2) {
-          thisAmount += (r.getDays() - 2) * 1.5 ;
-        }
-      }
-      if (movies.get(r.getMovieId()).getCode().equals("new")) {
-        thisAmount = r.getDays() * 3;
-      }
-      if (movies.get(r.getMovieId()).getCode().equals("childrens")) {
-        thisAmount = 1.5;
-        if (r.getDays() > 3) {
-          thisAmount += (r.getDays() - 3) * 1.5;
-        }
+
+      Movie movie = movies.get(r.getMovieId());
+      String typeMovie = movie.getCode();
+
+      switch(typeMovie){
+        case "regular":
+          thisAmount = 2;
+          if (r.getDays() > 2) {
+            thisAmount += (r.getDays() - 2) * 1.5 ;
+          }
+          break;
+        case "new":
+          thisAmount = r.getDays() * 3;
+          break;
+        case "childrens":
+          thisAmount = 1.5;
+          if (r.getDays() > 3) {
+              thisAmount += (r.getDays() - 3) * 1.5;
+          }
+          break;
+        default:
+          break;
       }
 
       //add frequent bonus points
